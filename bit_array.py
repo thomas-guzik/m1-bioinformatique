@@ -8,12 +8,15 @@ You can create the array specifying the number of bits it should contain.
 
 class BitArray:
     def __init__(self, n_bits):
-        self.array = bytearray(self.n_bits)
-    
-    def get_offset(self, i):
-        return i % 8
+        self.len = n_bits
+        self.array = bytearray(n_bits)
     
     def get_position(self, i):
+        """Return the position of the i-th bit in an array grouping by offset"""
+        return i % 8
+    
+    def get_offset(self, i):
+        """Return the position of the offset for a given i"""
         return i // 8
     
     def set_i(self, i, value):
@@ -31,3 +34,6 @@ class BitArray:
         byte = self.array[offset]
         mask = 1 << position
         return byte & mask
+    
+    def get_bytes(self):
+        return bytes(self.array)
