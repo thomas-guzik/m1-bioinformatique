@@ -1,9 +1,11 @@
 import random
 from utilis import *
-from bloom_filter import *
+from BloomFilter import *
 from bit_array import *
-from compress import *
+from fasta import Fasta
+from kmer import Kmer
 
-com = Compress(4, 25)
-com.read_fasta("ecoli_sample_50Kb_reads_30x.fasta", 8)
-print(com.bf.exists("AAAAAAAA"))
+fasta = Fasta("tests/test1.fasta")
+bf = BloomFilter(100, 5)
+bf.import_fasta(fasta, 4)
+bf.search_bifurcations("AACCGGTT", 8, 4)
